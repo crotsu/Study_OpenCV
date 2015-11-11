@@ -5,8 +5,8 @@ base_x = 190  #cols
 base_y = 681  #rows
 
 # 文字サイズ
-width = 177
-height = 177
+width = 176
+height = 176
 
 # 1枚に記録されている文字の個数
 row = 9
@@ -19,5 +19,5 @@ for i in range(row):
         src = cv2.imread('../image/oeda1.jpg', 1)
         dst = src[y:y+height, x:x+width]
         cv2.imwrite('../result/' + str(i) + str(j) + '.jpg', dst)
-        x += width
-    y += height + 124 # 124は縦の文字と文字間の距離
+        x = x + width + 3 
+    y  = y + height + 129 # 124は縦の文字と文字間の距離
