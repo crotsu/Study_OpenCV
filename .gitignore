@@ -1,5 +1,6 @@
 # my ignore file
 image/
+result/
 *.jpg
 
 # Byte-compiled / optimized / DLL files
