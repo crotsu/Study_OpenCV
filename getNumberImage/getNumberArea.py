@@ -32,11 +32,14 @@ loc = np.where(res >= threshold)
 corner = []
 for pt in zip(*loc[::-1]):
     corner.append(pt)
-    cv2.rectangle(img, pt, (pt[0] + width, pt[1] + height), (0,0,255), 3)
+
+# 枠領域を検出
+size = corner[1][0] - corner[0][0]
+for (i, pt) in enumerate(corner):
+    cv2.rectangle(img, (pt[0]+3, pt[1]+3), (pt[0] + size-15, pt[1] + size-15), (0,0,255), 3)
+    dst = img[(pt[1]+3):(pt[1]+size-15), (pt[0]+3):(pt[0]+size-15)]
+    cv2.imwrite('../result/' + str(i) + '.jpg', dst)
 
 # 出力
-cv2.imwrite('canvas.png',canvas)
 cv2.imwrite('corner.png',img)
-#cv2.imshow('image', canvas)
-#cv2.waitKey(0)
-#cv2.destroyAllWindows()
+
