@@ -24,8 +24,30 @@ for paper in range(5):
         for j in range(col):
             rand[i][j] = number[ct]
             ct+=1;
+    
+    # 左上の一番最初の数字を，質問用紙の識別子にするために，強制的に値を入れ替える．
+    if paper==1:
+        tmp = rand[0][0]
+        rand[0][0] = rand[0][11]
+        rand[0][11] = tmp
 
-    df = pd.DataFrame(rand)
+    if paper==2:
+        tmp = rand[0][0]
+        rand[0][0] = rand[1][4]
+        rand[1][4] = tmp
+
+    if paper==3:
+        tmp = rand[0][0]
+        rand[0][0] = rand[1][0]
+        rand[1][0] = tmp
+
+    if paper==4:
+        tmp = rand[0][0]
+        rand[0][0] = rand[1][11]
+        rand[1][11] = tmp
+
+    # ファイル出力
+    df = pd.DataFrame(np.int32(rand))
     filename = 'rand' + str(paper+1)
     df.to_excel(filename+'.xlsx', sheet_name='Japan_US')
     df.to_csv(filename+'.csv', index=False, header=None)
