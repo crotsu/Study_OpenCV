@@ -19,17 +19,14 @@ ct = 0
 for paper in range(5):
     row = 9
     col = 12
-    rand = np.zeros((row*3,col))
-    for i in range(row*3):
-        if i%3==0:
-            for j in range(col):
-                rand[i][j] = number[ct]
-                ct+=1;
-        else:
-            rand[i] = zero
-
+    rand = np.zeros((row,col))
+    for i in range(row):
+        for j in range(col):
+            rand[i][j] = number[ct]
+            ct+=1;
 
     df = pd.DataFrame(rand)
-    filename = 'rand' + str(paper+1) + '.xlsx'
-    df.to_excel(filename, sheet_name='Japan_US')
+    filename = 'rand' + str(paper+1)
+    df.to_excel(filename+'.xlsx', sheet_name='Japan_US')
+    df.to_csv(filename+'.csv', index=False, header=None)
 
