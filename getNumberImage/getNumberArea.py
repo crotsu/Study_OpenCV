@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 import pandas as pd
 
-filenumber = 1
+filenumber = 2
 
 # 元画像 コーナーの数は16+12*9= 124
 img = cv2.imread('../image/oeda' +str(filenumber) + '.jpg', 1)
@@ -57,11 +57,16 @@ corner.extend(sortVal)
 
 # 数字
 sortVal = []
+j = 0
 for (i, pt) in enumerate(zip(*loc[::-1])):
     if 16<=i:
         sortVal.append(pt)
-sortVal.sort()
-corner.extend(sortVal)
+        j += 1
+    if j==12:
+        sortVal.sort()
+        corner.extend(sortVal)
+        sortVal = []
+        j = 0
 
 df = pd.read_csv('../numberSheet/rand' + str(filenumber) + '.csv', header=None)
 
